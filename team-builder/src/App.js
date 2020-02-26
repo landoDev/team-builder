@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
 import Avengers from './components/Avengers'
 import AvengerForm from './components/AvengerForm'
 import './App.css';
@@ -7,11 +6,28 @@ import './App.css';
 function App() {
   const [avengers, setAvengers] = useState([
     {
+      id: 0,
       alias: 'Ironman',
-      identity: 'Tony Stark'
+      identity: 'Tony Stark',
+      superpower: 'Genius',
+      home:'Earth',
+      avatar: 'https://thumbs.dreamstime.com/b/ironman-iron-man-marvel-s-superhero-model-picture-taken-streets-singapore-126620551.jpg'
     }
   ])
-  console.log(avengers)
+  // console.log(avengers)
+
+  const addNewAvenger = avenger =>{
+    const newAvenger = {
+        id: Date.now(),
+        alias: avenger.alias ,
+        identity: avenger.identity,
+        superpower: avenger.superpower,
+        home: avenger.home,
+        avatar: avenger.avatar
+    }
+    setAvengers([...avengers, newAvenger])
+  }
+
 
   return (
     <div className="App">
@@ -20,7 +36,7 @@ function App() {
         <h1>Avengers Initiative</h1>
         <p>CONFIDENTIAL: DIRECTOR FURY EYES ONLY</p>
       </header>
-      <AvengerForm />
+      <AvengerForm addNewAvenger={addNewAvenger} />
       <Avengers avengers={avengers} />
     </div>
   );
